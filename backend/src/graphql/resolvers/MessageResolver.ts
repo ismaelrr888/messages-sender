@@ -3,6 +3,7 @@ import axios from "axios";
 import { Message, MessageInput } from "../TypeObject/Message";
 import { ApolloError } from "apollo-server-express";
 import { getMessagesFromDb, saveMessageToDb } from "../../db/MessageHandle";
+import axiosClient from "../../lib/axios";
 
 @Resolver()
 export class MessageResolver {
@@ -13,23 +14,8 @@ export class MessageResolver {
 
 	@Mutation(() => String)
 	async createMessage(@Arg("input") input: MessageInput): Promise<string> {
-		const token =
-			process.env.NODE_ENV === "production"
-				? process.env.TOKEN_PROD
-				: process.env.TOKEN_DEV;
-
 		try {
-			const axiosConfig = {
-				headers: {
-					Authorization: `Bearer ${token}`,
-					"Content-Type": "application/json",
-				},
-			};
-			await axios.post(
-				`https://graph.facebook.com/v17.0/119721974554237/messages`,
-				JSON.stringify(input),
-				axiosConfig
-			);
+			await axiosClient.post("messages", JSON.stringify(input));
 			await saveMessageToDb(input);
 
 			return "Success send message";
