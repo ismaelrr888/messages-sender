@@ -1,7 +1,7 @@
 import { IMessage } from "../interfaces/Message";
 import MessageModel from "../models/Message";
 
-const saveMessage = async (data: IMessage): Promise<string> => {
+const saveMessageToDb = async (data: IMessage): Promise<string> => {
 	const msg = { ...data };
 	console.log("THE DATA", msg);
 
@@ -13,8 +13,17 @@ const saveMessage = async (data: IMessage): Promise<string> => {
 		return "Success send message and saved to MongoDB";
 	} catch (error) {
 		console.log(error);
-		throw new Error("Failed to save the message to MongoDB");
+		throw new Error("Failed to save the message");
 	}
 };
 
-export { saveMessage };
+const getMessagesFromDb = async (): Promise<IMessage[]> => {
+	try {
+		const messages: IMessage[] = await MessageModel.find<IMessage>({});
+		return messages;
+	} catch (error) {
+		throw new Error("Failed fetch messages");
+	}
+};
+
+export { saveMessageToDb, getMessagesFromDb };

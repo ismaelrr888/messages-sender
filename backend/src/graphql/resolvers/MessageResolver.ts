@@ -1,8 +1,8 @@
 import { Resolver, Query, Mutation, Arg } from "type-graphql";
 import axios from "axios";
-import { MessageInput } from "../TypeObject/Message";
+import { Message, MessageInput } from "../TypeObject/Message";
 import { ApolloError } from "apollo-server-express";
-import { saveMessage } from "../../db/MessageHandle";
+import { getMessagesFromDb, saveMessageToDb } from "../../db/MessageHandle";
 
 @Resolver()
 export class MessageResolver {
@@ -30,11 +30,16 @@ export class MessageResolver {
 				JSON.stringify(input),
 				axiosConfig
 			);
-			await saveMessage(input);
+			await saveMessageToDb(input);
 
 			return "Success send message";
 		} catch (error) {
 			throw new ApolloError(`${error}`);
 		}
+	}
+	@Query(() => [Message])
+	async getMessages(): Promise<Message[]> {
+		const message = await getMessagesFromDb();
+		return message;
 	}
 }
