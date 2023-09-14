@@ -1,0 +1,36 @@
+version: "3"
+services:
+  # client:
+  #   build:
+  #     context: ./frontend
+  #     dockerfile: Dockerfile
+  #   stdin_open: true
+  #   ports:
+  #     - 3000:3000
+  #   networks:
+  #     - net-app
+  api:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - 4000:4000
+    environment:
+      - NODE_ENV=production
+      - MONGO_URI_PROD=mongodb://mongo:27017/message
+      - TOKEN_PROD=EAAOVk3nUSNcBO14G25226fZAfiLzUo1QoZAezsukq0BeSmPcttCdpU6FzTHhiEJa6l1OrgGQT8um2PN3ECp7i3nUUMfTWxrktqCSQyZAIBYyWVNYCUxLZBUikRs711UOacHpv0ZAlVZBYmR1zQf9vIDnI8KmIEmO5vI9qcUq5kga3qTs4U3PuE3AqTjJajGrw4ZCUtkBglH6Uo56ps8ZBMN7dWlmnZC0ZD
+      - PORT=4000
+      - JWT_SECRET_SEED=my-great-secret-is-hardwork
+    networks:
+      - message-app
+    depends_on:
+      - mongo
+  mongo:
+    image: mongo
+    ports:
+      - 27017:27017
+    networks:
+      - message-app
+networks:
+  message-app:
+    driver: bridge
