@@ -1,5 +1,4 @@
 import { Resolver, Query, Mutation, Arg } from "type-graphql";
-import axios from "axios";
 import { Message, MessageInput } from "../TypeObject/Message";
 import { ApolloError } from "apollo-server-express";
 import { getMessagesFromDb, saveMessageToDb } from "../../db/MessageHandle";

@@ -8,6 +8,7 @@ import { ApolloServerPluginLandingPageGraphQLPlayground } from "apollo-server-co
 import connectDB from "./db/database";
 import "reflect-metadata";
 import { MessageResolver } from "./graphql/resolvers/MessageResolver";
+import { AuthResolver } from "./graphql/resolvers/AuthResolvers";
 
 async function bootstrap() {
 	const app = express();
@@ -16,7 +17,7 @@ async function bootstrap() {
 	// Create a TypeGraphQL schema
 	const schema = await buildSchema({
 		// Add your resolvers here
-		resolvers: [HelloResolver, MessageResolver],
+		resolvers: [HelloResolver, MessageResolver, AuthResolver],
 	});
 
 	// Create an Apollo Server instance

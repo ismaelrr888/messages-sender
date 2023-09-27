@@ -18,7 +18,7 @@ services:
     environment:
       - NODE_ENV=production
       - MONGO_URI_PROD=mongodb://mongo:27017/message
-      - TOKEN_PROD=EAAOVk3nUSNcBO14G25226fZAfiLzUo1QoZAezsukq0BeSmPcttCdpU6FzTHhiEJa6l1OrgGQT8um2PN3ECp7i3nUUMfTWxrktqCSQyZAIBYyWVNYCUxLZBUikRs711UOacHpv0ZAlVZBYmR1zQf9vIDnI8KmIEmO5vI9qcUq5kga3qTs4U3PuE3AqTjJajGrw4ZCUtkBglH6Uo56ps8ZBMN7dWlmnZC0ZD
+      - TOKEN_PROD=EAAOVk3nUSNcBO4EdRS7ey5VA9zvpaqmoZA8uBstWnPWoY0XQqE3ZChuC5jHzFAmHJkMvDlp1Bhl3KjkqYuItcsp4jqEZBEPcPFuVJ4dznpJz4brAqNHPlPtnd4mEz6w5fFBUwHp6zC0qzIP5NOF6ZCOZBzZAUKfXgShVnpwWNrlBJAHw9kfIgkGqVqHE69dyPqULKrlpqcfCFZAbCpqfd3BPPQAfpsZD
       - PORT=4000
       - JWT_SECRET_SEED=my-great-secret-is-hardwork
     networks:
